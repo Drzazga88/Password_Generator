@@ -112,22 +112,22 @@ function getPasswordOptions() {
   let wantLowerCase = confirm(
     "Do you want to have lower cases in your password? OK for yes, cancel for no."
   );
-  console.log(wantLowerCase);
+  //console.log(wantLowerCase);
 
   let wantUpperCase = confirm(
     "Do you want to have Upper cases in your password? OK for yes, cancel for no."
   );
-  console.log(wantUpperCase);
+  //console.log(wantUpperCase);
 
   let wantNumeric = confirm(
     "Do you want to have numeric characters in your password? OK for yes, cancel for no."
   );
-  console.log(wantNumeric);
+  //console.log(wantNumeric);
 
   let wantSpecial = confirm(
     "Do you want to have special characters in your password? OK for yes, cancel for no."
   );
-  console.log(wantSpecial);
+  //console.log(wantSpecial);
 
   if (
     wantLowerCase == false &&
@@ -146,7 +146,7 @@ function getPasswordOptions() {
     wantNumeric: wantNumeric,
     wantSpecial: wantSpecial,
   };
-  return;
+  return pool;
 }
 
 getPasswordOptions(); //this calls the function
@@ -155,38 +155,56 @@ getPasswordOptions(); //this calls the function
 function getRandom(arr) {
   let randomElement = Math.floor(Math.random() * arr.length);
   let randomIndex = arr[randomElement];
-  //console.log(randomIndex, arr[randomElement]);
-  
   return randomIndex;
 }
 //test of function
-let randomSpecial = getRandom(specialCharacters);
-console.log(randomSpecial);
-let randomNumeric = getRandom(numericCharacters);
-console.log(randomNumeric);
-let randomLowerCase = getRandom(lowerCasedCharacters);
-console.log(randomLowerCase);
-let randomUpperCase = getRandom(upperCasedCharacters);
-console.log(randomUpperCase);
+//let randomSpecial = getRandom(specialCharacters);
+//console.log(randomSpecial);
+//let randomNumeric = getRandom(numericCharacters);
+//console.log(randomNumeric);
+//let randomLowerCase = getRandom(lowerCasedCharacters);
+//console.log(randomLowerCase);
+//let randomUpperCase = getRandom(upperCasedCharacters);
+//console.log(randomUpperCase);
 
 // Function to generate password with user input
 function generatePassword() {
-  //let option = getPasswordOptions();
-  //console.log(option);
+  //this allows to get to user's choices
+  let option = getPasswordOptions();
+  console.log(option);
 
-  let result = [];
-  let ultimate_password = [];
-  
-  for (let index in getPasswordOptions.pool){
-    ultimate_password += getPasswordOptions.pool[index];
-    result.push(getRandom(getPasswordOptions.pool[index]));
+  let sumsCharacters = []; //guaranteed c har
+  let intermediate = []; //possible char
+  let ultimatePassword = []; //result
+
+  if (option.wantLowerCase) {
+    intermediate = intermediate.concat(lowerCasedCharacters);
+    sumsCharacters.push(getRandom(lowerCasedCharacters));
   }
-  for (let i=0; i<getPasswordOptions.passwordlength; i++){
-    result.push(getPasswordOptions.pool(ultimate_password));
+  if (option.wantUpperCase) {
+    intermediate = intermediate.concat(upperCasedCharacters);
+    sumsCharacters.push(getRandom(upperCasedCharacters));
   }
-  return result;
+  if (option.wantNumeric) {
+    intermediate = intermediate.concat(numericCharacters);
+    sumsCharacters.push(getRandom(numericCharacters));
+  }
+  if (option.wantSpecial) {
+    intermediate = intermediate.concat(specialCharacters);
+    sumsCharacters.push(getRandom(specialCharacters));
+  }
+
+  console.log(intermediate);
+
+  for (let index = 0; index < option.passwordLength; index++) {
+    var yourPassword = getRandom(intermediate);
+    console.log(yourPassword);
+    ultimatePassword.push(yourPassword);
+  }
+
+  console.log(ultimatePassword);
+  return ultimatePassword.join("");
 }
-generatePassword();
 
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
