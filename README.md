@@ -18,6 +18,6 @@ This password generator app uses JavaScript to generate a random code based on u
   - Code validates for each input and at least one character type should be selected
   - Once prompts are answered then the password is generated and displayed in an alert or written to the page
 
-[Example of result](./assets/Screenshot%202023-01-16%20at%2015.15.17.png)
+![Example of result](./assets/Screenshot%202023-01-16%20at%2015.15.17.png)
 
-![**Deployed application:**](https://drzazga88.github.io/Password_Generator/)
+[**Deployed application:**](https://drzazga88.github.io/Password_Generator/)
