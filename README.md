@@ -20,4 +20,4 @@ This password generator app uses JavaScript to generate a random code based on u
 
 [Example of result](./assets/Screenshot%202023-01-16%20at%2015.15.17.png)
 
-![**Deployed application:**](httml.)
+![**Deployed application:**](https://drzazga88.github.io/Password_Generator/)
