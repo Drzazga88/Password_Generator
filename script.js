@@ -96,41 +96,33 @@ function getPasswordOptions() {
       "How many characters should have your password? Minimum input is 10, maximum is 64."
     )
   );
-  //condition below checks if password requirements were met and if not, it prompts a user to choose correctly
-  if (
-    isNaN(passwordLength) === true ||
-    passwordLength < 10 ||
-    passwordLength > 64
-  ) {
+  //variables for user password options' choice
+  let wantLowerCase;
+  let wantUpperCase;
+  let wantNumeric;
+  let wantSpecial;
+  //user sets up conditions of the password or gets alerted if chooses password length outside of range
+  if (passwordLength > 10 && passwordLength < 64) {
+    wantLowerCase = confirm(
+      "Do you want to have lower cases in your password? OK for yes, cancel for no."
+    );
+    wantUpperCase = confirm(
+      "Do you want to have Upper cases in your password? OK for yes, cancel for no."
+    );
+    wantNumeric = confirm(
+      "Do you want to have numeric characters in your password? OK for yes, cancel for no."
+    );
+    wantSpecial = confirm(
+      "Do you want to have special characters in your password? OK for yes, cancel for no."
+    );
+  } else {
     alert(
       "You must choose a number between 10 and 64 characters. Refresh page."
     );
-    return;
   }
-  //variables created to store a user choices for the following options: lower case, upper case, numeric character and special character
-  //confirm option chosen as it returns only false or true (faster for if statement below)
-  let wantLowerCase = confirm(
-    "Do you want to have lower cases in your password? OK for yes, cancel for no."
-  );
-  //console.log(wantLowerCase);
-
-  let wantUpperCase = confirm(
-    "Do you want to have Upper cases in your password? OK for yes, cancel for no."
-  );
-  //console.log(wantUpperCase);
-
-  let wantNumeric = confirm(
-    "Do you want to have numeric characters in your password? OK for yes, cancel for no."
-  );
-  //console.log(wantNumeric);
-
-  let wantSpecial = confirm(
-    "Do you want to have special characters in your password? OK for yes, cancel for no."
-  );
-  //console.log(wantSpecial);
-
+  //alert for user if none of password characterstics are chosen
   if (
-    wantLowerCase == false &&
+    wantLowerCase === false &&
     wantUpperCase === false &&
     wantNumeric === false &&
     wantSpecial === false
@@ -157,15 +149,6 @@ function getRandom(arr) {
   let randomIndex = arr[randomElement];
   return randomIndex;
 }
-//test of function
-//let randomSpecial = getRandom(specialCharacters);
-//console.log(randomSpecial);
-//let randomNumeric = getRandom(numericCharacters);
-//console.log(randomNumeric);
-//let randomLowerCase = getRandom(lowerCasedCharacters);
-//console.log(randomLowerCase);
-//let randomUpperCase = getRandom(upperCasedCharacters);
-//console.log(randomUpperCase);
 
 // Function to generate password with user input
 function generatePassword() {
@@ -173,9 +156,9 @@ function generatePassword() {
   let option = getPasswordOptions();
   console.log(option);
 
-  let sumsCharacters = []; //guaranteed c har
-  let intermediate = []; //possible char
-  let ultimatePassword = []; //result
+  let sumsCharacters = []; //joins arrays with randomly chosen characters
+  let intermediate = []; //intermediate joins arrays based on user's password options choice
+  let ultimatePassword = [];
 
   if (option.wantLowerCase) {
     intermediate = intermediate.concat(lowerCasedCharacters);
